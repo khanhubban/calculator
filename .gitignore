@@ -1,15 +1,38 @@
+# IDE files (Android Studio)
+.idea/
 *.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+*/build/
 local.properties
+.gradle/
+build/ # Also ignore top-level build folder
+
+# System files
+.DS_Store
+
+# Sensitive information (if any)
+# secrets.properties
+
+# Optional: Keystore files (should NOT be committed usually)
+# *.jks
+# *.keystore
+
+# Gradle Wrapper generated file (sometimes ignored, sometimes committed)
+# gradle/wrapper/gradle-wrapper.jar # Uncomment if you don't want to commit the jar
+
+# Build Reports / Logs / Outputs
+*.log
+reports/
+outputs/
+captures/
+
+# Specific intermediate files (add as needed)
+app/build/intermediates/
+app/build/outputs/
+app/build/generated/
+
+# CMake generated files
+*.cmake
+CMakeLists.txt.user
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
