@@ -12,10 +12,11 @@
     <color name="calc_light_medium_grey">#FFFFFF</color>
     <color name="calc_light_light_grey">#E0E0E0</color>
 
-    <color name="button_dark_grey_background">#505050</color> <color name="button_operator_background">#4285F4</color> <color name="my_toolbar_color">#1C1C1E</color>
+    <color name="button_dark_grey_background">#505050</color>
+    <color name="button_operator_background">#4285F4</color>
+    <color name="my_toolbar_color">#4285F4</color>
 
-
-        <color name="grey_toolbar">#616161</color> <color name="white">#FFFFFFFF</color>
-        <color name="black">#FFFFFFFF</color>
-
-</resources>
+    <color name="grey_toolbar">#616161</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FFFFFFFF</color>
+    <color name="splash_background">#FFFFFF</color>  </resources>

@@ -9,6 +9,10 @@ import android.view.HapticFeedbackConstants;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -67,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // --- Set Click Listeners (Button listeners remain unchanged) ---
-        // Digits, Operators, Actions... (Keep all button listeners)
         // Digits
         binding.button0.setOnClickListener(v -> { v.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP); viewModel.processDigit("0"); });
         binding.button1.setOnClickListener(v -> { v.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP); viewModel.processDigit("1"); });
@@ -143,12 +146,26 @@ public class MainActivity extends AppCompatActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Calculation History");
-        builder.setItems(items, null);
+
+        // Create an ArrayAdapter to customize text color
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this, android.R.layout.select_dialog_item, items) {
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                TextView textView = (TextView) view.findViewById(android.R.id.text1);
+                textView.setTextColor(getResources().getColor(R.color.calc_white_text)); // Or a color that suits your theme
+                return view;
+            }
+        };
+
+        builder.setAdapter(adapter, null); // Use the custom adapter
+
         builder.setNegativeButton("Clear History", (dialog, which) -> {
             viewModel.clearHistory();
             Toast.makeText(this, "History Cleared", Toast.LENGTH_SHORT).show();
         });
         builder.setPositiveButton("Close", (dialog, which) -> dialog.dismiss());
+
         AlertDialog dialog = builder.create();
         dialog.show();
     }
