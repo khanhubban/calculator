@@ -1,10 +1,7 @@
 package com.example.claculator_jav;
 
-import android.content.Context; // Keep if Vibrator used
-import android.os.Build; // Keep if Vibrator used
+import android.content.Context;
 import android.os.Bundle;
-import android.os.VibrationEffect; // Keep if Vibrator used
-import android.os.Vibrator; // Keep if Vibrator used
 import android.view.HapticFeedbackConstants;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,23 +16,23 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.Toolbar; // Import Toolbar
-import androidx.lifecycle.Observer;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.claculator_jav.databinding.ActivityMainBinding;
 
-import java.math.BigDecimal; // Keep if formatting used
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.math.BigDecimal;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private CalculatorViewModel viewModel;
-    private DecimalFormat displayFormatter; // Keep if used
+    private DecimalFormat displayFormatter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,18 +41,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         // --- SET UP THE TOOLBAR ---
-        Toolbar toolbar = binding.toolbar; // Use view binding to get the toolbar
-        setSupportActionBar(toolbar);      // Set the toolbar as the action bar
+        Toolbar toolbar = binding.toolbar;
+        setSupportActionBar(toolbar);
         // --- END TOOLBAR SETUP ---
 
-
-        // --- Formatter Setup (Keep if needed) ---
-        displayFormatter = (DecimalFormat) NumberFormat.getNumberInstance(Locale.US); // Or Locale.getDefault()
+        // --- Formatter Setup ---
+        displayFormatter = (DecimalFormat) NumberFormat.getNumberInstance(Locale.US);
         displayFormatter.setMinimumFractionDigits(0);
-        displayFormatter.setMaximumFractionDigits(8); // Max digits after decimal
-        displayFormatter.setGroupingUsed(false); // Optional: disable thousands separators
+        displayFormatter.setMaximumFractionDigits(8);
+        displayFormatter.setGroupingUsed(false);
         // --- End Formatter Setup ---
-
 
         viewModel = new ViewModelProvider(this).get(CalculatorViewModel.class);
 
@@ -67,10 +62,10 @@ public class MainActivity extends AppCompatActivity {
             binding.expressionDisplay.setText(expression);
         });
         viewModel.history.observe(this, historyList -> {
-            System.out.println("MainActivity: History updated, size = " + (historyList != null ? historyList.size() : 0)); // Debugging
+            System.out.println("MainActivity: History updated, size = " + (historyList != null ? historyList.size() : 0));
         });
 
-        // --- Set Click Listeners (Button listeners remain unchanged) ---
+        // --- Set Click Listeners ---
         // Digits
         binding.button0.setOnClickListener(v -> { v.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP); viewModel.processDigit("0"); });
         binding.button1.setOnClickListener(v -> { v.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP); viewModel.processDigit("1"); });
@@ -100,38 +95,33 @@ public class MainActivity extends AppCompatActivity {
             viewModel.processParenthesis("(");
         });
 
-
         // --- REMOVE Listener for History from expressionDisplay ---
-        binding.expressionDisplay.setOnClickListener(null); // Remove the old listener
+        binding.expressionDisplay.setOnClickListener(null);
 
-    } // onCreate ends here
+    }
 
     // --- Inflate Options Menu ---
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu); // Inflate the menu resource
-        return true; // Return true to display the menu
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
     }
 
     // --- Handle Options Menu Item Clicks ---
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int itemId = item.getItemId(); // Get the item ID once
+        int itemId = item.getItemId();
 
         if (itemId == R.id.action_history) {
-            showHistoryDialog(); // Handle History click
-            return true; // Indicate the click was handled
+            showHistoryDialog();
+            return true;
         } else if (itemId == R.id.action_change_theme) {
-            // Handle Change Theme click
-            toggleTheme(); // Call method to handle theme change
-            return true; // Indicate the click was handled
+            toggleTheme();
+            return true;
         }
-        // Handle other menu items here if you add more
-
-        return super.onOptionsItemSelected(item); // Default handling for unhandled items
+        return super.onOptionsItemSelected(item);
     }
-
 
     // --- Method to Show History Dialog (Keep this as is) ---
     private void showHistoryDialog() {
@@ -147,19 +137,22 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Calculation History");
 
-        // Create an ArrayAdapter to customize text color
+        // Create a custom ArrayAdapter to set text color
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this, android.R.layout.select_dialog_item, items) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
-                TextView textView = (TextView) view.findViewById(android.R.id.text1);
-                textView.setTextColor(getResources().getColor(R.color.calc_white_text)); // Or a color that suits your theme
+                TextView textView = view.findViewById(android.R.id.text1);
+
+                // Set the text color based on the current theme
+                int textColor = ContextCompat.getColor(getContext(), R.color.calc_black_text); // Default to black
+                textView.setTextColor(textColor);
+
                 return view;
             }
         };
 
-        builder.setAdapter(adapter, null); // Use the custom adapter
-
+        builder.setAdapter(adapter, null);
         builder.setNegativeButton("Clear History", (dialog, which) -> {
             viewModel.clearHistory();
             Toast.makeText(this, "History Cleared", Toast.LENGTH_SHORT).show();
@@ -179,17 +172,11 @@ public class MainActivity extends AppCompatActivity {
         if (currentNightMode == android.content.res.Configuration.UI_MODE_NIGHT_YES) {
             // Currently dark, switch to light
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            // TODO: Save preference (e.g., SharedPreferences) -> MODE_NIGHT_NO
         } else {
             // Currently light (or unspecified), switch to dark
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            // TODO: Save preference (e.g., SharedPreferences) -> MODE_NIGHT_YES
         }
 
-        // *** UNCOMMENT this line to make the theme change apply immediately ***
         recreate();
-
-        // Remove or comment out the Toast message, as the change is now instant
-        // Toast.makeText(this, "Theme will update on next app restart", Toast.LENGTH_SHORT).show();
     }
 }

@@ -3,6 +3,7 @@ package com.example.claculator_jav;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper; // Import Looper
 import android.os.Build;  // Import Build
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +20,7 @@ public class Splash_Activity extends AppCompatActivity {
         //  No need to set windowSplashScreenBackground in Java
         //  It's handled by the theme in styles.xml
 
-        new Handler().postDelayed(() -> {
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {  // Use Looper explicitly
             Intent intent = new Intent(Splash_Activity.this, MainActivity.class);
             startActivity(intent);
             finish(); // Close the splash activity

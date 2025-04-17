@@ -12,6 +12,8 @@
         <item name="colorFunctionButton">@color/calc_light_light_grey</item>
         <item name="colorOnFunctionButton">@color/calc_black_text</item>
     </style>
+    <style name="Theme.Claculator_jav" parent="Base.Theme.Claculator_jav">
+        <item name="android:windowSplashScreenBackground">@color/my_splash_background</item>
+    </style>
 
-    <style name="Theme.Claculator_jav" parent="Base.Theme.Claculator_jav" />
 </resources>

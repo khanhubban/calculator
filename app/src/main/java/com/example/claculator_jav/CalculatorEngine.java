@@ -19,8 +19,8 @@ public class CalculatorEngine {
     private BigDecimal currentOperand;
     private boolean isEnteringDigits;
     private boolean isInErrorState = false;
-    private boolean displayTrailingDecimal = false; // For display formatting (e.g., "5.")
-    private int parenthesisBalance = 0; // Track open parentheses
+    private boolean displayTrailingDecimal = false;
+    private int parenthesisBalance = 0;
 
     // --- Stacks for calculation precedence ---
     private Stack<BigDecimal> valueStack;
@@ -32,8 +32,6 @@ public class CalculatorEngine {
         operatorStack = new Stack<>();
         clear(); // Initialize the state
     }
-
-    // --- Public Methods ---
 
     /**
      * Resets the engine to its initial state.
@@ -57,11 +55,6 @@ public class CalculatorEngine {
         if (isInErrorState) {
             clear(); // Start fresh after error
         }
-
-        // Handle potential implicit multiplication (e.g., after ')') if needed
-        // if (!operatorStack.isEmpty() && operatorStack.peek().equals(CLOSE_PAREN) && !isEnteringDigits) {
-        //    inputOperator("×"); // Requires careful state management
-        // }
 
         if (!isEnteringDigits) {
             currentOperand = BigDecimal.ZERO;
