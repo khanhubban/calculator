@@ -1,7 +1,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
     <style name="Base.Theme.Claculator_jav" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">@color/calc_blue_operator</item>          <item name="colorOnPrimary">@color/calc_white_text</item>           <item name="colorSecondary">@color/calc_blue_operator</item>
+        <item name="colorOnSecondary">@color/calc_white_text</item>          <item name="colorSurface">@color/calc_dark_background</item>        <item name="colorOnSurface">@color/calc_white_text</item>            <item name="colorSurfaceVariant">@color/calc_dark_medium_grey</item><item name="colorOnSurfaceVariant">@color/calc_white_text</item>     <item name="android:colorBackground">@color/calc_dark_background</item> <item name="colorFunctionButton">@color/calc_dark_light_grey</item> <item name="colorOnFunctionButton">@color/calc_black_text</item>     </style>
+
+    <style name="Theme.Claculator_jav" parent="Base.Theme.Claculator_jav">
+        <item name="popupTheme">@style/AppTheme.PopupOverlay</item>
+        <item name="actionBarPopupTheme">@style/AppTheme.PopupOverlay</item>
+
     </style>
 </resources>

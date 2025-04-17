@@ -1,3 +1,28 @@
 <resources>
-    <string name="app_name">claculator_jav</string>
+    <string name="app_name">Calculator Jav</string>
+
+    <string name="menu_history">History</string>
+    <string name="menu_change_theme">Change Theme</string>
+
+    <string name="cd_clear">Clear All</string>
+    <string name="cd_parentheses">Parentheses</string>
+    <string name="cd_percent">Percent</string>
+    <string name="cd_divide">Divide</string>
+    <string name="cd_digit_7">7</string>
+    <string name="cd_digit_8">8</string>
+    <string name="cd_digit_9">9</string>
+    <string name="cd_multiply">Multiply</string>
+    <string name="cd_digit_4">4</string>
+    <string name="cd_digit_5">5</string>
+    <string name="cd_digit_6">6</string>
+    <string name="cd_subtract">Subtract</string>
+    <string name="cd_digit_1">1</string>
+    <string name="cd_digit_2">2</string>
+    <string name="cd_digit_3">3</string>
+    <string name="cd_add">Add</string>
+    <string name="cd_digit_0">0</string>
+    <string name="cd_decimal">Decimal Point</string>
+    <string name="cd_backspace">Backspace</string>
+    <string name="cd_equals">Equals</string>
+
 </resources>

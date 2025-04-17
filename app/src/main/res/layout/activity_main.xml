@@ -1,25 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/calculator_background_dark"
-    android:padding="16dp">
+    android:background="?attr/colorSurface"
+    android:fitsSystemWindows="true"  tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/my_toolbar_color"  android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
     <TextView
         android:id="@+id/expressionDisplay"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:gravity="end|center_vertical"
-        android:textColor="#A0A0A0"
-        android:textSize="24sp"
-        android:paddingStart="24dp"
-        android:paddingEnd="24dp"
-        android:maxLines="1"
+        android:layout_height="150dp"
         android:ellipsize="start"
-        android:text="" />
+        android:gravity="start|center_vertical"
+        android:minHeight="48dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:text=""
+        android:textColor="?attr/colorOnSurfaceVariant"
+        android:textSize="40sp" />
 
     <TextView
         android:id="@+id/display"
@@ -28,15 +37,17 @@
         android:minHeight="180dp"
         android:layout_marginBottom="8dp"
         android:background="@android:color/transparent"
-        android:ellipsize="start"
+        android:ellipsize="end"
         android:gravity="end|bottom"
         android:maxLines="1"
         android:paddingStart="24dp"
         android:paddingEnd="24dp"
         android:paddingBottom="12dp"
-        android:text=""
-        android:textColor="@color/display_text_light"
-        android:textSize="60sp" />
+        android:text="0"
+        android:textColor="?attr/colorOnSurface" android:textSize="60sp"
+        android:importantForAutofill="no"
+        android:freezesText="true"
+        app:autoSizeTextType="uniform" app:autoSizeMinTextSize="24sp"  app:autoSizeMaxTextSize="60sp"  app:autoSizeStepGranularity="2sp" />
 
     <Space
         android:layout_width="match_parent"
@@ -48,164 +59,178 @@
         android:layout_height="wrap_content"
         android:columnCount="4"
         android:rowCount="5"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="16dp"
         android:layout_gravity="bottom" >
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_ac"
-            style="@style/CalculatorButton.Function" android:layout_width="0dp"
-            android:layout_height="wrap_content" android:layout_rowWeight="1"
+            style="@style/CalculatorButton.Function"
+            android:layout_width="0dp"
             android:layout_columnWeight="1"
-            android:text="AC"/>
-        <Button
+            android:layout_height="@dimen/button_height"
+            android:text="AC"
+            android:contentDescription="@string/cd_clear"/>
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_parentheses"
-            style="@style/CalculatorButton.Number" android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
+            style="@style/CalculatorButton.Function"
+            android:layout_width="0dp"
             android:layout_columnWeight="1"
-            android:text="( )"/>
-        <Button
+            android:layout_height="@dimen/button_height"
+            android:text="( )"
+            android:contentDescription="@string/cd_parentheses"/>
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_percent"
-            style="@style/CalculatorButton.Number" android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
+            style="@style/CalculatorButton.Function"
+            android:layout_width="0dp"
             android:layout_columnWeight="1"
-            android:text="%"/>
-        <Button
+            android:layout_height="@dimen/button_height"
+            android:text="%"
+            android:contentDescription="@string/cd_percent"/>
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_divide"
             style="@style/CalculatorButton.Operator"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:text="÷"/>
-        <Button
+            android:layout_height="@dimen/button_height"
+            android:text="÷"
+            android:contentDescription="@string/cd_divide"/>
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_7"
             style="@style/CalculatorButton.Number"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:text="7"/>
-        <Button
+            android:layout_height="@dimen/button_height"
+            android:text="7"
+            android:contentDescription="@string/cd_digit_7"/>
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_8"
             style="@style/CalculatorButton.Number"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:text="8"/>
-        <Button
+            android:layout_height="@dimen/button_height"
+            android:text="8"
+            android:contentDescription="@string/cd_digit_8"/>
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_9"
             style="@style/CalculatorButton.Number"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:text="9"/>
-        <Button
+            android:layout_height="@dimen/button_height"
+            android:text="9"
+            android:contentDescription="@string/cd_digit_9"/>
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_multiply"
             style="@style/CalculatorButton.Operator"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:text="×"/>
-        <Button
+            android:layout_height="@dimen/button_height"
+            android:text="×"
+            android:contentDescription="@string/cd_multiply"/>
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_4"
             style="@style/CalculatorButton.Number"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:text="4"/>
-        <Button
+            android:layout_height="@dimen/button_height"
+            android:text="4"
+            android:contentDescription="@string/cd_digit_4"/>
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_5"
             style="@style/CalculatorButton.Number"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:text="5"/>
-        <Button
+            android:layout_height="@dimen/button_height"
+            android:text="5"
+            android:contentDescription="@string/cd_digit_5"/>
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_6"
             style="@style/CalculatorButton.Number"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:text="6"/>
-        <Button
+            android:layout_height="@dimen/button_height"
+            android:text="6"
+            android:contentDescription="@string/cd_digit_6"/>
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_subtract"
             style="@style/CalculatorButton.Operator"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:text="-"/>
-        <Button
+            android:layout_height="@dimen/button_height"
+            android:text="-"
+            android:contentDescription="@string/cd_subtract"/>
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_1"
             style="@style/CalculatorButton.Number"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:text="1"/>
-        <Button
+            android:layout_height="@dimen/button_height"
+            android:text="1"
+            android:contentDescription="@string/cd_digit_1"/>
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_2"
             style="@style/CalculatorButton.Number"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:text="2"/>
-        <Button
+            android:layout_height="@dimen/button_height"
+            android:text="2"
+            android:contentDescription="@string/cd_digit_2"/>
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_3"
             style="@style/CalculatorButton.Number"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:text="3"/>
-        <Button
+            android:layout_height="@dimen/button_height"
+            android:text="3"
+            android:contentDescription="@string/cd_digit_3"/>
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_add"
             style="@style/CalculatorButton.Operator"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:text="+"/>
-        <Button
+            android:layout_height="@dimen/button_height"
+            android:text="+"
+            android:contentDescription="@string/cd_add"/>
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_0"
             style="@style/CalculatorButton.Number"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
+            android:layout_height="@dimen/button_height"
             android:layout_columnWeight="1"
-            android:text="0"/>
-        <Button
+            android:layout_columnSpan="1"
+            android:text="0"
+            android:contentDescription="@string/cd_digit_0"/>
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_decimal"
             style="@style/CalculatorButton.Number"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:text="."/>
-        <Button
+            android:layout_height="@dimen/button_height"
+            android:text="."
+            android:contentDescription="@string/cd_decimal"/>
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_backspace"
-            style="@style/CalculatorButton.Number" android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
+            style="@style/CalculatorButton.Number"
+            android:layout_width="0dp"
             android:layout_columnWeight="1"
-            android:text="⌫"/>
-        <Button
+            android:layout_height="@dimen/button_height"
+            android:text="⌫"
+            android:textSize="20sp"
+            app:iconTint="?attr/colorOnSurfaceVariant"
+            android:contentDescription="@string/cd_backspace"/>
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_equals"
             style="@style/CalculatorButton.Equals"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:text="="/>
-
+            android:layout_height="@dimen/button_height"
+            android:text="="
+            android:contentDescription="@string/cd_equals"/>
 
     </GridLayout>
 </LinearLayout>
