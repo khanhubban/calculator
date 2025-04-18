@@ -59,4 +59,4 @@ The app follows the Model-View-ViewModel (MVVM) architecture to separate concern
 * Improve the UI design and user experience.
 * Add unit tests.
 * Localize the app for different languages.
-* Fix nested parentheses
+* Fix nested parentheses.
